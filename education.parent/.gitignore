@@ -1,0 +1,11 @@
+/education.parent.iml
+/education.parent.ipr
+/education.parent_test.iml
+/education.parent_main.iml
+/education.parent.iws
+/.gradle/
+.gitignore
+education.stand.iml
+education.stand_main.iml
+education.stand_test.iml
+src/

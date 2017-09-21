@@ -1,0 +1,19 @@
+{
+  "name": "education",
+  "version": "0.0.1",
+  "description": "greetgo! help desk",
+  "scripts": {
+    "gulp": "gulp",
+    "start": "gulp start"
+  },
+  "author": "greetgo!",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "github:gulpjs/gulp#4.0",
+    "del": "2.2.2",
+    "@types/node": "7.0.5",
+    "gulp-less": "3.3.0",
+    "gulp-pug": "3.2.0",
+    "browser-sync": "2.18.8"
+  }
+}
