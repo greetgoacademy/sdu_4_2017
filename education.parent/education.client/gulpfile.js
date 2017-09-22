@@ -25,7 +25,8 @@ task('clean', function () {
 
 task('copy', function () {
     return gulp.src([
-        "node_modules/zone.js/dist/zone.js"
+        "node_modules/zone.js/dist/zone.min.js",
+        "node_modules/core-js/client/shim.min.js"
     ]).pipe(gulp.dest(outDir()));
 });
 
@@ -38,30 +39,25 @@ task('pug', function () {
         .pipe(gulp.dest(outDir()));
 });
 
-task('copy', function () {
-    return gulp.src("front/pug/index.pug").pipe(pug({pretty: true})).on("error", console.log)
-        .pipe(gulp.dest(outDir()));
-});
-
 task('assets', ser('less', 'pug'));
 
 task('webpack', function (callback) {
 
     let options = {
-        entry  : [path.resolve('.', 'front', 'ts', 'main.ts')],
-        output : {
-            path             : outDir(),
-            publicPath       : '/',
-            filename         : '[name].js',
-            sourceMapFilename: '[name]-[chunkhash:10].js.map',
+        entry: [path.resolve('.', 'front', 'ts', 'main.ts')],
+        output: {
+            path: outDir(),
+            publicPath: '/',
+            filename: '[name].js',
+            sourceMapFilename: '[name].js.map',
         },
-        watch  : false,
-        devtool:'cheap-module-inline-source-map' ,
-        module : {
+        watch: true,
+        devtool: 'cheap-module-inline-source-map',
+        module: {
             loaders: [{
-                test   : /\.ts$/,
+                test: /\.ts$/,
                 include: path.resolve(__dirname, 'front', 'ts'),
-                loader : ['ts-loader'],
+                loader: ['ts-loader'],
             }],
         },
         resolve: {
@@ -80,7 +76,7 @@ task('webpack', function (callback) {
 
         if (err) {
             notifier.notify({
-                title  : 'Webpack',
+                title: 'Webpack',
                 message: err
             });
 
