@@ -26,13 +26,12 @@ subprojects {
 
   repositories {
     mavenLocal()
-    maven { url 'http://192.168.11.222:8080/repository/internal' }
     mavenCentral()
   }
 
   dependencies {
     ext.greetgoMvcVersion = "2.0.7"
-    ext.greetgoDepInjectVersion = "1.1.4"
+    ext.greetgoDepInjectVersion = "2.0.0"
     ext.guavaVersion = '12.0'
 
     testCompile 'org.testng:testng:6.5.1'
