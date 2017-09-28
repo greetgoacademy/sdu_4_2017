@@ -24,14 +24,17 @@ task('clean', function () {
 });
 
 task('copy', function () {
-    return gulp.src([
+    gulp.src([
         "node_modules/zone.js/dist/zone.min.js",
         "node_modules/core-js/client/shim.min.js"
-    ]).pipe(gulp.dest(outDir()));
+    ]).pipe(gulp.dest(path.resolve(outDir(), 'js')));
+    return gulp.src([
+        "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+    ]).pipe(gulp.dest(path.resolve(outDir(), 'css')));
 });
 
 task('less', function () {
-    return gulp.src("front/less/*.less").pipe(less()).pipe(gulp.dest(outDir()));
+    return gulp.src("front/less/*.less").pipe(less()).pipe(gulp.dest(path.resolve(outDir(), 'css')));
 });
 
 task('pug', function () {
@@ -46,7 +49,7 @@ task('webpack', function (callback) {
     let options = {
         entry: [path.resolve('.', 'front', 'ts', 'main.ts')],
         output: {
-            path: outDir(),
+            path: path.resolve(outDir(), 'js'),
             publicPath: '/',
             filename: '[name].js',
             sourceMapFilename: '[name].js.map',

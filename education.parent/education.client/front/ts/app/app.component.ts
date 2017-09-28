@@ -6,8 +6,8 @@ import {error} from "util";
 
 @Component({
     selector: 'helpdesk-app',
-    template: `<button (click)="getIntroduce()">Introduce yourself to world</button>
-        <div *ngIf="showIntroduce">{{showText}}</div>  
+    template: `
+        <auth-component></auth-component>
         `
 })
 export class AppComponent implements OnInit {
