@@ -29,7 +29,8 @@ task('copy', function () {
         "node_modules/core-js/client/shim.min.js"
     ]).pipe(gulp.dest(path.resolve(outDir(), 'js')));
     return gulp.src([
-        "node_modules/@angular/material/prebuilt-themes/indigo-pink.css"
+        "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+        "node_modules/bootstrap/dist/css/bootstrap.min.css"
     ]).pipe(gulp.dest(path.resolve(outDir(), 'css')));
 });
 
