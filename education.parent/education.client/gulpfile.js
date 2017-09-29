@@ -13,7 +13,7 @@ const webpack = require('webpack');
 const gulpLog = require('gulplog');
 const notifier = require('node-notifier');
 
-let isWatch = false;
+let isWatch = true;
 
 function outDir() {
     return path.resolve(__dirname, 'build', 'public');
@@ -35,7 +35,7 @@ task('copy', function () {
 });
 
 task('less', function () {
-    return gulp.src("front/less/*.less").pipe(less()).pipe(gulp.dest(path.resolve(outDir(), 'css')));
+    return gulp.src("front/less/main.less").pipe(less()).pipe(gulp.dest(path.resolve(outDir(), 'css')));
 });
 
 task('pug', function () {
@@ -55,7 +55,7 @@ task('webpack', function (callback) {
             filename: '[name].js',
             sourceMapFilename: '[name].js.map',
         },
-        watch: true,
+        watch: isWatch,
         devtool: 'cheap-module-inline-source-map',
         module: {
             loaders: [{
@@ -101,6 +101,13 @@ task('webpack', function (callback) {
     });
 });
 
+task('build', ser(
+    'clean', 'copy', function (callback) {
+        isWatch = false;
+        callback();
+    }, "webpack", "assets"
+));
+
 task('server', function (back) {
     browserSync.init({server: path.resolve('build', 'public')});
 
@@ -110,7 +117,10 @@ task('server', function (back) {
 });
 
 task('start', ser(
-    'clean', 'assets', 'copy', 'webpack', 'server',
+    'clean', 'assets', 'copy', function (callback) {
+        isWatch = true;
+        callback();
+    }, 'webpack', 'server',
     function () {
         gulp.watch('front/pug/**/*.pug', ser('pug'));
         gulp.watch('front/less/**/*.less', ser('less'));

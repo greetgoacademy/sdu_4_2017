@@ -14,7 +14,6 @@ public class IntroductionRegisterStandImpl implements IntroductionRegister {
   @Override
   public IntroductionInfo getIntroductionInfo() {
     IntroductionInfo introductionInfo = new IntroductionInfo();
-    introductionInfo.introductionText = db.get().introductionText;
     return introductionInfo;
   }
 

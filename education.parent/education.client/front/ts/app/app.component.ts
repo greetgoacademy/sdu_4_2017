@@ -3,39 +3,55 @@ import "rxjs/add/operator/toPromise";
 import {HttpService} from "../service/HttpService";
 import {IntroduceInfo} from "../model/IntroductionInfo";
 import {error} from "util";
+import {UserInfo} from "../model/UserInfo";
 
 @Component({
     selector: 'helpdesk-app',
     template: `
-        <auth-component></auth-component>
+        <auth-component *ngIf="authVisibility" (finish)="startApp()"></auth-component>
+          
+        <main-tab-set *ngIf="mainTabSetVisibility" (exit)="exit()"></main-tab-set>
+        <admin-tab-set class="app-component-sidenav" *ngIf="adminTabSetVisibility" (exit)="exit()"></admin-tab-set>
         `
 })
 export class AppComponent implements OnInit {
-    showIntroduce: boolean;
-    showText: string;
+    authVisibility: boolean = false;
+    mainTabSetVisibility: boolean = false;
+    adminTabSetVisibility: boolean = false;
 
     ngOnInit(): void {
-        console.log('on init');
+        if (this.httpService.token) {
+            this.startApp();
+        } else {
+            this.authVisibility = true;
+        }
     }
 
     constructor(private httpService: HttpService) {
-        this.showIntroduce = false;
     }
 
-    getIntroduce() {
-        if (this.showIntroduce == true) {
-            this.showIntroduce = false;
-        } else {
-            console.log("1")
-            this.httpService.get("/introduction/helloWorld").toPromise().then(result => {
-                let introductionInfo = result.json() as IntroduceInfo;
-                if (introductionInfo) {
-                    this.showText = introductionInfo.introductionText;
-                    this.showIntroduce = true;
-                }
-            }, error => {
+    startApp() {
+        this.authVisibility = false;
+        this.httpService.post("/user/info",{personId:this.httpService.personId}).toPromise().then(
+            result => {
+                let userInfo = result.json() as UserInfo;
+                (<any>window).roleCans = userInfo.cans;
+
+                this.mainTabSetVisibility = false;
+                this.adminTabSetVisibility = false;
+
+                if ((<any>window).canI('admin'))
+                    this.adminTabSetVisibility = true;
+                else if ((<any>window).canI('main'))
+                    this.mainTabSetVisibility = true;
+            },
+            error => {
                 console.log(error);
-            })
-        }
+                this.mainTabSetVisibility = false;
+                this.adminTabSetVisibility = false;
+                this.authVisibility = false;
+            }
+        )
     }
+
 }

@@ -39,6 +39,15 @@ export class HttpService {
         else sessionStorage.removeItem("token")
     }
 
+    public get personId(): string | null {
+        return sessionStorage.getItem("personId");
+    }
+
+    public set personId(value: string | null) {
+        if (value) sessionStorage.setItem("personId", value);
+        else sessionStorage.removeItem("personId")
+    }
+
     public url(urlSuffix: string): string {
         return this.prefix() + urlSuffix;
     }
@@ -68,5 +77,18 @@ export class HttpService {
         let ob = new OptionsBuilder();
         if (this.token) ob.appendHeader('Token', this.token);
         return ob;
+    }
+
+    public post(urlSuffix: string, keyValue: { [key: string]: string | number | boolean | null }): Observable<Response> {
+        let data = new URLSearchParams();
+        for (let key in keyValue) {
+            let value = keyValue[key];
+            if (value) data.append(key, value as string);
+        }
+
+        let ob = this.newOptionsBuilder();
+        ob.appendHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        return this.http.post(this.url(urlSuffix), data.toString(), ob.get());
     }
 }
