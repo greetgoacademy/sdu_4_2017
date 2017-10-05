@@ -17,6 +17,8 @@ import {AdminContentComponent} from "./admin/admin-content.component";
 import {AdmiTabComponent} from "./admin/admin-tab-list.component";
 import {MainTab1Component} from "./main/main-tab-1.component";
 import {MainTab2Component} from "./main/main-tab-2.component";
+import {ClientToolbarComponent} from "./main/main-tab-1/client-toolbar.component";
+import {ClientTableComponent} from "./main/main-tab-1/client-table.component";
 
 @NgModule({
     imports: [BrowserModule,
@@ -39,6 +41,8 @@ import {MainTab2Component} from "./main/main-tab-2.component";
         AdminContentComponent,
         MainComponent,
         MainTab1Component,
+        ClientTableComponent,
+        ClientToolbarComponent,
         MainTab2Component
     ],
     bootstrap: [AppComponent],
