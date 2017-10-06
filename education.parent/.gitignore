@@ -1,4 +1,4 @@
-/education.parent.iml
+*.iml
 /education.parent.ipr
 /education.parent_test.iml
 /education.parent_main.iml
@@ -9,3 +9,6 @@ education.stand.iml
 education.stand_main.iml
 education.stand_test.iml
 /build/
+build/
+/.idea/
+/education.client/education.client.iml
