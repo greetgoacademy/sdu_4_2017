@@ -4,6 +4,7 @@ import design_patterns.creational.abstract_factory.banking.BankingTeamFactory;
 import design_patterns.creational.abstract_factory.website.WebsiteTeamFactory;
 
 public class Project {
+
   public static void main(String[] args) {
     {
       ProjectTeamFactory projectTeamFactory = new BankingTeamFactory();
@@ -17,7 +18,7 @@ public class Project {
       projectManager.manageProject();
     }
 
-    System.out.println("========================================");
+    System.out.println("==================================================");
 
     {
       ProjectTeamFactory projectTeamFactory = new WebsiteTeamFactory();
