@@ -1,4 +1,4 @@
-import {Component, OnChanges, OnInit, SimpleChanges} from "@angular/core";
+import {Component, EventEmitter, OnChanges, OnInit, Output, SimpleChanges} from "@angular/core";
 import {HttpService} from "../../../service/HttpService";
 import {ClientDataSource} from "./data-source/client.data-source";
 import {ClientInfo} from "../../../model/main.main-tab-1/ClientInfo";
@@ -42,7 +42,7 @@ import {ClientInfo} from "../../../model/main.main-tab-1/ClientInfo";
             <md-row *mdRowDef="let row; columns: displayedColumns;"
                     class="md-row" 
                     [ngClass]="{'highlight': selectedId == row.id}" 
-                    (click)="getId(row)"></md-row>
+                    (click)="selectRow(row)"></md-row>
         </md-table>
     `
 })
@@ -51,6 +51,8 @@ export class ClientTableComponent implements OnChanges,OnInit{
     private displayedColumns = ['id', 'surname', 'name', 'patronymic','birthDate','age'];
     private dataSource:ClientDataSource|null;
     private selectedId:string;
+
+    @Output() selectedRow = new EventEmitter<ClientInfo | null>();
 
     constructor(private httpService:HttpService){
 
@@ -64,8 +66,11 @@ export class ClientTableComponent implements OnChanges,OnInit{
 
     }
 
-    getId(row:ClientInfo): void{
-        console.log(row.id);
-        this.selectedId=row.id;
+    selectRow(row:ClientInfo): void{
+        if(row) {
+            console.log(row.id);
+            this.selectedId = row.id;
+        }
+        this.selectedRow.emit(row);
     }
 }

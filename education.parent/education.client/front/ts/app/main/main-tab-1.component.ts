@@ -5,10 +5,10 @@ import {Component, OnInit} from "@angular/core";
         <div class="container">
             <div class="row">
                 <div class="col-lg-11">
-                    <client-table></client-table>
+                    <client-table (selectedRow)="clientInfo = $event"></client-table>
                 </div>
                 <div class="col-lg-1">
-                    <client-toolbar></client-toolbar>
+                    <client-toolbar [clientInfo]="clientInfo"></client-toolbar>
                 </div>
             </div>
         </div>
