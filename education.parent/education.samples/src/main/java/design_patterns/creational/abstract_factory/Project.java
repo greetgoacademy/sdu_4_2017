@@ -12,7 +12,7 @@ public class Project {
       Tester tester = projectTeamFactory.getTester();
       ProjectManager projectManager = projectTeamFactory.getProjectManager();
 
-      System.out.println("Creating bank system...");
+      System.out.println("Creating banking system...");
       developer.writeCode();
       tester.testCode();
       projectManager.manageProject();

@@ -8,6 +8,8 @@ public class DeveloperFactory {
         return new JavaDeveloper();
       case CPP:
         return new CppDeveloper();
+      case PHP:
+        return new PhpDeveloper();
       default:
         throw new IllegalArgumentException("No developer for " + programmingLanguageType);
     }

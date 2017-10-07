@@ -13,7 +13,7 @@ public class Website implements Copyable {
   }
 
   @Override
-  public Object copy() {
+  public Website copy() {
     Website copy = new Website(id, name, sourceCode);
     return copy;
   }

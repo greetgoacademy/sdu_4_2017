@@ -2,10 +2,7 @@ package kz.greetgo.education.stand.register_stand_impl.db;
 
 import kz.greetgo.depinject.core.Bean;
 import kz.greetgo.depinject.core.HasAfterInject;
-import kz.greetgo.education.stand.register_stand_impl.model.ClientDot;
-import kz.greetgo.education.stand.register_stand_impl.model.FuncDot;
-import kz.greetgo.education.stand.register_stand_impl.model.PersonDot;
-import kz.greetgo.education.stand.register_stand_impl.model.RoleDot;
+import kz.greetgo.education.stand.register_stand_impl.model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,6 +18,8 @@ public class Db implements HasAfterInject{
   public final Map<String, List<String>> roleFuncMapping = new HashMap<>();
   public final Map<String, String> personRoleMapping = new HashMap<>();
   public final Map<String, ClientDot> clientStorage=new HashMap<>();
+  public final Map<String, DictionaryDot> dictionaryStorage=new HashMap<>();
+
   public final AtomicLong clientSeq=new AtomicLong(1);
 
   @Override
@@ -91,7 +90,7 @@ public class Db implements HasAfterInject{
               .setId(clientSeq.getAndIncrement()+"")
               .setSurname("Tukibayev")
               .setName("Ilyas")
-              .setPatronymic(" ")
+              .setPatronymic("Bakbergenovich")
               .setAge(26)
             .build());
 
@@ -104,5 +103,18 @@ public class Db implements HasAfterInject{
               .setPatronymic("Nurmuhanbetuly")
               .setAge(26)
             .build());
+
+    DictionaryDot iphone = new DictionaryDot();
+    iphone.code="iphone";
+    iphone.title="IPhone X";
+
+    dictionaryStorage.put("iphone", iphone);
+
+
+    DictionaryDot samsung = new DictionaryDot();
+    samsung.code="samsung";
+    samsung.title="Samsung Galaxy S8";
+
+    dictionaryStorage.put("samsung",samsung);
   }
 }
