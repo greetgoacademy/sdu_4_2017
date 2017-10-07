@@ -5,7 +5,7 @@ import {ClientInfo} from "../../../model/main.main-tab-1/ClientInfo";
 
 @Component({
     selector:'client-table',
-    //language=Angular2HTML
+    inputs:["updateClientInfo"],
     template:`
         <md-table #table [dataSource]="dataSource">
             <ng-container mdColumnDef="id">
@@ -27,12 +27,7 @@ import {ClientInfo} from "../../../model/main.main-tab-1/ClientInfo";
                 <md-header-cell *mdHeaderCellDef> Patronymic </md-header-cell>
                 <md-cell *mdCellDef="let row"> {{row.patronymic}} </md-cell>
             </ng-container>
-
-            <ng-container mdColumnDef="birthDate">
-                <md-header-cell *mdHeaderCellDef> Birth Date </md-header-cell>
-                <md-cell *mdCellDef="let row"> {{row.birthDate}} </md-cell>
-            </ng-container>
-
+            
             <ng-container mdColumnDef="age">
                 <md-header-cell *mdHeaderCellDef> Age </md-header-cell>
                 <md-cell *mdCellDef="let row"> {{row.age}} </md-cell>
@@ -48,7 +43,7 @@ import {ClientInfo} from "../../../model/main.main-tab-1/ClientInfo";
 })
 export class ClientTableComponent implements OnChanges,OnInit{
 
-    private displayedColumns = ['id', 'surname', 'name', 'patronymic','birthDate','age'];
+    private displayedColumns = ['id', 'surname', 'name', 'patronymic', 'age'];
     private dataSource:ClientDataSource|null;
     private selectedId:string;
 
@@ -59,11 +54,20 @@ export class ClientTableComponent implements OnChanges,OnInit{
     }
 
     ngOnInit(): void {
-        this.dataSource=new ClientDataSource(this.httpService);
+        this.updateTableList();
     }
 
     ngOnChanges(changes: SimpleChanges): void {
+        console.log("dadasdas");
+        console.log(changes.updateClientInfo);
+        let updateClientInfoChange=changes.updateClientInfo;
+        if(updateClientInfoChange){
+            this.updateTableList();
+        }
+    }
 
+    updateTableList():void{
+        this.dataSource=new ClientDataSource(this.httpService);
     }
 
     selectRow(row:ClientInfo): void{

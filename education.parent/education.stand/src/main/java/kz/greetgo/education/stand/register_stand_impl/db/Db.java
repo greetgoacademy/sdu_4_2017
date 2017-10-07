@@ -2,6 +2,7 @@ package kz.greetgo.education.stand.register_stand_impl.db;
 
 import kz.greetgo.depinject.core.Bean;
 import kz.greetgo.depinject.core.HasAfterInject;
+import kz.greetgo.education.stand.register_stand_impl.model.ClientDot;
 import kz.greetgo.education.stand.register_stand_impl.model.FuncDot;
 import kz.greetgo.education.stand.register_stand_impl.model.PersonDot;
 import kz.greetgo.education.stand.register_stand_impl.model.RoleDot;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 
 @Bean
 public class Db implements HasAfterInject{
@@ -18,6 +20,8 @@ public class Db implements HasAfterInject{
   public final Map<String, FuncDot> funcStorage = new HashMap<>();
   public final Map<String, List<String>> roleFuncMapping = new HashMap<>();
   public final Map<String, String> personRoleMapping = new HashMap<>();
+  public final Map<String, ClientDot> clientStorage=new HashMap<>();
+  public final AtomicLong clientSeq=new AtomicLong(1);
 
   @Override
   public void afterInject() throws Exception {
@@ -81,5 +85,24 @@ public class Db implements HasAfterInject{
     personRoleMapping.put("admin","admin");
     personRoleMapping.put("admin_can_see_part","admin_part");
 
+    clientStorage.put(clientSeq.get()+"",
+            ClientDot
+              .newBuilder()
+              .setId(clientSeq.getAndIncrement()+"")
+              .setSurname("Tukibayev")
+              .setName("Ilyas")
+              .setPatronymic(" ")
+              .setAge(26)
+            .build());
+
+    clientStorage.put(clientSeq.get()+"",
+            ClientDot
+              .newBuilder()
+              .setId(clientSeq.getAndIncrement()+"")
+              .setSurname("Tursyn")
+              .setName("Seyit")
+              .setPatronymic("Nurmuhanbetuly")
+              .setAge(26)
+            .build());
   }
 }

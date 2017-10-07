@@ -1,5 +1,6 @@
-import {Component, Inject, OnInit} from "@angular/core";
-import {MD_DIALOG_DATA, MdDialogRef} from "@angular/material";
+import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
+import { MdDialogRef} from "@angular/material";
+import {ClientInfo} from "../../../model/main.main-tab-1/ClientInfo";
 @Component({
     selector:'client_edit',
     template:`
@@ -8,41 +9,48 @@ import {MD_DIALOG_DATA, MdDialogRef} from "@angular/material";
         </md-toolbar>
         <div md-dialog-content>
             <md-input-container class="md-block" style="width: 100%">
-                <input mdInput placeholder="Surname" name="fieldSurname"
-                       [(ngModel)]="fieldSurname"  [disabled]="disabled" required>
+                <input #surname mdInput placeholder="Surname" name="fieldSurname"
+                       [(ngModel)]="client.surname"  [disabled]="disabled" required>
                 <md-error>This field is required</md-error>
             </md-input-container>
             <md-input-container class="md-block" style="width: 100%">
                 <input mdInput placeholder="Name" name="fieldName"
-                       [(ngModel)]="fieldName"  [disabled]="disabled" required>
+                       [(ngModel)]="client.name"  [disabled]="disabled" required>
                 <md-error>This field is required</md-error>
             </md-input-container>
             <md-input-container class="md-block" style="width: 100%">
                 <input mdInput placeholder="Patronymic" name="fieldPatronymic"
-                       [(ngModel)]="fieldPatronymic"  [disabled]="disabled" required>
+                       [(ngModel)]="client.patronymic"  [disabled]="disabled" required>
                 <md-error>This field is required</md-error>
             </md-input-container>
             <md-input-container class="md-block" style="width: 100%">
                 <input mdInput type="number" placeholder="Age" name="fieldAge"
-                       [(ngModel)]="fieldAge"  [disabled]="disabled" required>
+                       [(ngModel)]="client.age"  [disabled]="disabled" required>
                 <md-error>This field is required</md-error>
             </md-input-container>
         </div>
         <div md-dialog-actions>
-            <button md-button [md-dialog-close]="data.animal" tabindex="2">Save</button>
+            <button md-button tabindex="2" [mat-dialog-close]="getValue()">Save</button>
             <button md-button (click)="onNoClick()" tabindex="-1">Cancel</button>
         </div>
     `
 })
 export class ClientEditWindowComponent implements OnInit{
-    private fieldName:string;
-    private fieldSurname:string;
-    private fieldPatronymic:string;
-    private fieldAge:number;
+    private client:ClientInfo|null=new ClientInfo();
 
-    constructor(private dialogRef:MdDialogRef<ClientEditWindowComponent>,
-                @Inject(MD_DIALOG_DATA) public data: any){
+    @ViewChild("surname") surname: ElementRef;
 
+    constructor(private dialogRef:MdDialogRef<ClientEditWindowComponent>){
+    }
+
+    setValue(value:ClientInfo){
+        if(value){
+            this.client=value;
+        }
+    }
+
+    getValue():ClientInfo|null{
+        return this.client;
     }
 
     onNoClick(): void {
