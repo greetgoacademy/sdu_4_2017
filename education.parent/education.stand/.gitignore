@@ -1,4 +1,5 @@
-/education.stand_main.iml
-/education.stand_test.iml
-/education.stand.iml
 /build/
+
+*.iml
+*.ipr
+*.iws
