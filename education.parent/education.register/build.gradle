@@ -1,0 +1,19 @@
+dependencies{
+  compile project(':education.controller')
+
+  //
+  // from greetgo!
+  //
+  compile "kz.greetgo.mvc:greetgo.mvc:$greetgoMvcVersion"
+  compile "kz.greetgo.depinject:greetgo.depinject:$greetgoDepInjectVersion"
+  compile "kz.greetgo:greetgo.email:$greetgoEmailVersion"
+  //
+  // libs
+  //
+  compile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.21'
+
+  //
+  // test dependencies
+  //
+  testCompile "kz.greetgo.depinject:greetgo.depinject.testng:$greetgoDepInjectVersion"
+}
