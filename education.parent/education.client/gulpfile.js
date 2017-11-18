@@ -16,7 +16,7 @@ const notifier = require('node-notifier');
 let isWatch = true;
 
 function outDir() {
-    return path.resolve(__dirname, 'build', 'public');
+    return path.resolve(__dirname, 'build', 'public', 'education');
 }
 
 task('clean', function () {
