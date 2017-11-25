@@ -2,6 +2,11 @@
 
 import kz.greetgo.education.controller.model.AuthInfo;
 
-public interface AuthRegister {
-  AuthInfo getAutoInfo(String accountName, String password);
+import java.util.Date;
+
+  public interface AuthRegister {
+
+    AuthInfo getAutoInfo(String accountName, String password);
+
+  Date getSysdate();
 }
