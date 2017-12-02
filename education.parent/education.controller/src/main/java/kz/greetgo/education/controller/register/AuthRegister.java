@@ -8,5 +8,7 @@ import java.util.Date;
 
     AuthInfo getAutoInfo(String accountName, String password);
 
+    AuthInfo getAutoInfo2(String accountName, String password);
+
   Date getSysdate();
 }

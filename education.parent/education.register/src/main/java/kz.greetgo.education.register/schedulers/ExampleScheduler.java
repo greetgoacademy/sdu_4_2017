@@ -7,7 +7,7 @@ import kz.greetgo.scheduling.Scheduled;
 @Bean
 public class ExampleScheduler implements HasScheduled{
 
-  @Scheduled("повторять каждые 10 сек")
+  @Scheduled("repeat every 13 sec")
   public void example(){
     System.out.println("schedule running");
   }

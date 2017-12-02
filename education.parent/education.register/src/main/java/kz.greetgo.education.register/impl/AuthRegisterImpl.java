@@ -28,6 +28,13 @@ public class AuthRegisterImpl implements AuthRegister{
   }
 
   @Override
+  public AuthInfo getAutoInfo2(String accountName, String password) {
+    AuthInfo ret=authDao.get().getPersonIdByObject(accountName,password);
+    ret.token=RND.str(15);
+    return ret;
+  }
+
+  @Override
   public Date getSysdate() {
     return authDao.get().getSysdate();
   }

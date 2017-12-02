@@ -25,13 +25,13 @@ public class AuthRegisterImplTest extends AbstractDepinjectTestNg{
   }
 
   @Test
-  public void getAutoInfo(){
+  public void getAutoInfo2(){
     String id= RND.intStr(15);
     String accountName=RND.str(20);
     String enPassword= RND.str(30);
 
     authTestDao.get().insertPerson(id,accountName,enPassword);
-    AuthInfo autoInfo = authRegister.get().getAutoInfo(accountName, enPassword);
+    AuthInfo autoInfo = authRegister.get().getAutoInfo2(accountName, enPassword);
 
     assertThat(autoInfo).isNotNull();
     assertThat(autoInfo.personId).isEqualTo(id);

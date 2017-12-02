@@ -8,6 +8,8 @@ import kz.greetgo.education.controller.register.AuthRegister;
 import kz.greetgo.education.stand.register_stand_impl.db.Db;
 import kz.greetgo.education.stand.register_stand_impl.model.PersonDot;
 
+import java.util.Date;
+
 @Bean
 public class AuthRegisterStandImpl implements AuthRegister {
 
@@ -39,5 +41,15 @@ public class AuthRegisterStandImpl implements AuthRegister {
 
     throw new RestError(470, err.toString());
   }
+  }
+
+  @Override
+  public AuthInfo getAutoInfo2(String accountName, String password) {
+    return null;
+  }
+
+  @Override
+  public Date getSysdate() {
+    return null;
   }
 }
